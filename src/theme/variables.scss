@@ -1,0 +1,17 @@
+$ui-black: #000000;
+$ui-light-blue: #1890FF;
+
+
+
+$breakpoint-xl: 1200px;
+$breakpoint-md: 992px; //md
+$breakpoint-sm: 576px; //sm
+$breakpoint-xs: 360px;
+
+$wrapper-width: 1340px;
+
+.wrapper {
+  padding: 0 5px;
+  max-width: $wrapper-width;
+  margin: 0 auto;
+}

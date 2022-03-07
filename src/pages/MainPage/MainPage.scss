@@ -1,0 +1,80 @@
+@import "src/theme/variables";
+
+.applications {
+  &__sub-header {
+    padding: 30px 0;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 20px;
+    &-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      @media (max-width: $breakpoint-sm) {
+        justify-content: center;
+      }
+    }
+  }
+
+  &__form {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    margin: 20px;
+    &-search {
+      padding: 5px 12px;
+      width: 100%;
+      border: 1px solid #D9D9D9;
+      border-right: none;
+      outline: none;
+
+      &:focus {
+        box-shadow: 2px 2px 5px #D9D9D9;
+      }
+    }
+
+    &-button {
+      background-color: $ui-light-blue;
+      padding: 0 20px;
+
+      svg {
+        fill: #fff;
+      }
+    }
+  }
+
+  &-filter {
+    &__list {
+      display: flex;
+      @media (max-width: $breakpoint-sm) {
+        justify-content: center;
+      }
+    }
+    &__item {
+      margin: 0 10px;
+    }
+    &__button {
+      padding: 12px 4px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      &_active {
+        color: $ui-light-blue;
+        border-bottom: 2px solid $ui-light-blue;
+      }
+    }
+  }
+}
+.table {
+  text-align: left;
+}
+.pagination {
+  padding: 10px 0;
+  ul {
+    justify-content: center;
+    padding: 0;
+  }
+}

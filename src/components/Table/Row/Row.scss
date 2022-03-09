@@ -1,0 +1,7 @@
+.table-icon__accomodation,
+.table-icon__transport {
+    opacity: 0;
+    &_show {
+      opacity: 1;
+     }
+}

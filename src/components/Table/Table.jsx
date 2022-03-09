@@ -1,6 +1,7 @@
 import React from 'react'
 import {
-  Paper,
+  Backdrop, CircularProgress,
+  Paper, styled,
   Table,
   TableBody,
   TableCell,
@@ -10,7 +11,7 @@ import {
 } from '@mui/material'
 import Row from './Row/Row'
 
-const CustomPaginationActionTable = ({sortedApplicationList}) => {
+const CustomPaginationActionTable = ({sortedApplicationList, isLoading}) => {
 
   const columns = [
     {id: 'name', label: 'Name', maxWidth: 170},
@@ -20,18 +21,20 @@ const CustomPaginationActionTable = ({sortedApplicationList}) => {
     // { id: 'action', label: 'Action', minWidth: 170 }
   ]
 
-
   return (
     <>
       <Paper sx={{width: '100%', overflow: 'hidden'}}>
         <TableContainer sx={{maxHeight: 440}}>
-          <Table stickyHeader aria-label="sticky table">
+          <Table stickyHeader aria-label="customized  table">
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
                   <TableCell
                     key={column.id}
-                    style={{minWidth: column.minWidth}}
+                    style={{
+                      minWidth: column.minWidth,
+                      background: '#FAFAFA'
+                    }}
                   >
                     {column.label}
                   </TableCell>
@@ -42,7 +45,7 @@ const CustomPaginationActionTable = ({sortedApplicationList}) => {
               {sortedApplicationList
                 .map((row, index) => {
                   return (
-                    <Row key={index} row={row}/>
+                    <Row key={index} row={row} isLoading={isLoading}/>
                   )
                 })}
             </TableBody>

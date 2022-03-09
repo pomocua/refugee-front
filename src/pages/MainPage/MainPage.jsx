@@ -3,6 +3,7 @@ import Header from '../../components/Header/Header'
 import React, {useEffect, useState} from 'react'
 import CustomPaginationActionsTable from '../../components/Table/Table'
 import {Pagination} from '@mui/material'
+import axios from 'axios'
 
 const MainPage = () => {
 
@@ -109,39 +110,36 @@ const MainPage = () => {
     }
   ]
 
-  const applicationsList = fetchApplicationsList.map(fetchApplication => {
-    return {
-      ...fetchApplication,
-      transport: fetchApplication.needs.includes('Помощь с транспортом'),
-      accomodation: fetchApplication.needs.includes('Помощь с размещением')
-    }
-  })
-
+  const [isLoading, setIsLoading] = useState(false)
   const [searchValue, setSearchValue] = useState('')
   const [filters, setFilters] = useState([
     {title: 'With kids', value: 'numberOfChildren', isActive: false},
     {title: 'Transport', value: 'transport', isActive: false},
     {title: 'Accomodation', value: 'accomodation', isActive: false}
   ])
-
+  const [applicationsList, setApplicationList] = useState([])
   let filterApplicationList = [...applicationsList]
   filters.forEach(filter => {
     if (filter.isActive) {
       filterApplicationList = filterApplicationList.filter(application => application[filter.value])
     }
   })
-
   const [sortedApplicationList, setSortedApplicationList] = useState([...filterApplicationList])
 
   useEffect(() => {
     setSortedApplicationList([...filterApplicationList])
+  }, [applicationsList])
+  useEffect(() => {
+    setSortedApplicationList([...filterApplicationList])
   }, [filters])
-
   useEffect(() => {
     setSortedApplicationList(filterApplicationList.filter(application => {
       return application.fullName.toLowerCase().includes(searchValue.toLowerCase())
     }))
   }, [searchValue])
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   function changeFilterHandler(value) {
     setFilters(filters.map(filter => {
@@ -150,6 +148,48 @@ const MainPage = () => {
           : filter
       }
     ))
+  }
+
+  function fetchData(url, params) {
+    setIsLoading(true)
+    // axios.get(url, {
+    //   method: 'GET',
+    //   params
+    // }).then(response => {
+    //   try {
+    //     applicationsList = response.data.map(fetchApplication => {
+    //       return {
+    //         ...fetchApplication,
+    //         transport: fetchApplication.needs.includes('Помощь с транспортом'),
+    //         accomodation: fetchApplication.needs.includes('Помощь с размещением')
+    //       }
+    //     })
+    //   } catch (error) {
+    //     console.log(error)
+    //   } finally {
+    //     setIsLoading(false)
+    //   }
+    // })
+
+    setTimeout(() => {
+      const newApplicationsList = fetchApplicationsList.map(fetchApplication => {
+        return {
+          ...fetchApplication,
+          transport: fetchApplication.needs.includes('Помощь с транспортом'),
+          accomodation: fetchApplication.needs.includes('Помощь с размещением')
+        }
+      })
+      setApplicationList([...newApplicationsList])
+      setIsLoading(false)
+    }, 3000)
+  }
+
+  function changePageHandler(page) {
+    const params = {
+      page: page,
+      take: 20,
+    }
+    fetchData('url', params)
   }
 
   return (
@@ -197,18 +237,20 @@ const MainPage = () => {
       </section>
 
       <section className="applications-list">
-        <div className="wrapper">
-          <CustomPaginationActionsTable sortedApplicationList={sortedApplicationList}/>
-          <Pagination className="pagination"
-                      onChange={(event, value) => console.log(event, value)}
-                      count={Math.ceil(sortedApplicationList.length / 20)}
-                      defaultPage={1}
-                      siblingCount={1}
-                      boundaryCount={1}
-                      color="primary"
-          />
-        </div>
-      </section>
+          <div className="wrapper">
+            <CustomPaginationActionsTable sortedApplicationList={sortedApplicationList} isLoading={isLoading}/>
+            <Pagination className="pagination"
+                        onChange={(event, value) => console.log(event, value)}
+                        count={Math.ceil(sortedApplicationList.length / 20)}
+                        defaultPage={1}
+                        siblingCount={1}
+                        boundaryCount={1}
+                        color="primary"
+            />
+          </div>
+        </section>
+
+
 
     </div>
   )

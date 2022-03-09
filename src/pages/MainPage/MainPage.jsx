@@ -2,7 +2,7 @@ import './MainPage.scss'
 import Header from '../../components/Header/Header'
 import React, {useEffect, useState} from 'react'
 import CustomPaginationActionsTable from '../../components/Table/Table'
-import {Pagination} from '@mui/material'
+import {Backdrop, CircularProgress, Pagination} from '@mui/material'
 import axios from 'axios'
 
 const MainPage = () => {
@@ -194,6 +194,13 @@ const MainPage = () => {
 
   return (
     <div className="applications">
+
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isLoading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
 
       <Header/>
 

@@ -162,7 +162,7 @@ const App = () => {
           <Pagination className="pagination"
             onChange={(event, value) => changePage(event, value)}
                       // вместо count поставить данные о количестве постов
-            count={Math.floor('count' / 20)}
+            count={Math.ceil('count' / 20)}
             defaultPage={1}
             siblingCount={1}
             boundaryCount={1}

@@ -53,10 +53,10 @@ const ModalContent = ({data, handleClose}) => {
             </div>
             : null
           }
-          {data.accomodation
+          {data.accommodation
             ? <div className="modal-content__box-item">
               <div className="modal-content__card">
-                <h3 className="modal-content__card-title">Need accomodation</h3>
+                <h3 className="modal-content__card-title">Need accommodation</h3>
                 <p className="modal-content__card-info">
                   {data.destinationLocation}
                 </p>

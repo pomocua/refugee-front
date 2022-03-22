@@ -73,9 +73,15 @@ const Row = ({row, isLoading}) => {
           {dateResult === 0 ? 'today' : `${dateResult} ${dateResult > 1 ? 'days ago' : 'day ago'}`}
         </TableCell>
         <TableCell align="left">
-          <LocalShippingIcon className={row.transport ? 'table-icon__transport table-icon__transport_show' : 'table-icon__transport'} fontSize="large"/>
+          <LocalShippingIcon className={row.transport
+            ? 'table-icon__transport table-icon__transport_show'
+            : 'table-icon__transport'
+          } fontSize="large"/>
           &ensp;
-          <HouseIcon className={row.accomodation ? 'table-icon__accomodation table-icon__accomodation_show' : 'table-icon__accomodation'} fontSize="large"/>
+          <HouseIcon className={row.accommodation
+            ? 'table-icon__accommodation table-icon__accommodation_show'
+            : 'table-icon__accommodation'
+          } fontSize="large"/>
         </TableCell>
       </TableRow>
       <StyledModal

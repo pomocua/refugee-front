@@ -67,12 +67,7 @@
     }
     &__additional-information {
       padding: 5px;
-      border: 1px solid #000;
-      max-width: 300px;
-      margin: 0 auto;
-      @media (max-width: 665px) {
-        margin: 0;
-      }
+
     }
   }
 }

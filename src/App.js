@@ -13,6 +13,7 @@ const App = () => {
   const [searchValue, setSearchValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [applications, setApplications] = useState([])
+    // проверить актуальность всех полей
   const [queryParams, setQueryParams] = useState({
     'page': 1,
     'take': 20,
@@ -51,6 +52,7 @@ const App = () => {
     setSearchValue('')
   }
 
+  // вставить в url актуальный url
   function fetchData(url = '', params = queryParams) {
     axios.get(url, {
       method: 'GET',
@@ -149,7 +151,8 @@ const App = () => {
           <CustomPaginationActionTable applicationList={applications} isLoading={isLoading}/>
           <Pagination className="pagination"
                       onChange={(event, value) => changePage(event, value)}
-                      count={5}
+                      // изменить count на количество страниц из ответа
+                      count={Math.floor('count' / 20)}
                       defaultPage={1}
                       siblingCount={1}
                       boundaryCount={1}
